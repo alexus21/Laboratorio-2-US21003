@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textViewTopMessage"
+            android:id="@+id/textViewTopMessageLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -34,7 +34,7 @@
             android:hint="Nombre de usuario"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopMessage" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewTopMessageLogin" />
 
         <EditText
             android:id="@+id/editTextLoginPassword"
@@ -61,7 +61,7 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/textViewBottomMessage"
+            android:id="@+id/textViewBottomMessageSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
@@ -82,7 +82,7 @@
             app:layout_constraintEnd_toStartOf="@+id/editTextLoginUsername"
             app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopMessage" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewTopMessageLogin" />
 
         <ImageView
             android:id="@+id/imageView2"

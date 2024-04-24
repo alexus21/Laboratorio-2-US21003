@@ -32,7 +32,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentContainerView = findViewById(R.id.fragmentContainerView);
 
         getSupportFragmentManager().beginTransaction().replace(fragmentContainerView.getId(), fragmentLogin).commit();
-
-
     }
 }

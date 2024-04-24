@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.laboratorio2us21003.R;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link LoginFragment#newInstance} factory method to
@@ -77,7 +79,7 @@ public class LoginFragment extends Fragment {
         editTextLoginUsername = root.findViewById(R.id.editTextLoginUsername);
         editTextLoginPassword = root.findViewById(R.id.editTextLoginPassword);
         buttonLogin = root.findViewById(R.id.buttonLogin);
-        textViewBottomMessage = root.findViewById(R.id.textViewBottomMessage);
+        textViewBottomMessage = root.findViewById(R.id.textViewBottomMessageSignUp);
         spannableString = new SpannableString("¿No tienes una cuenta? Regístrate aquí");
 
         int startIndex = spannableString.toString().indexOf("Regístrate aquí");
@@ -86,7 +88,10 @@ public class LoginFragment extends Fragment {
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                Toast.makeText(getContext(), "Redirigiendo a la página de registro", Toast.LENGTH_SHORT).show();
+                Fragment signUpFragment = new SignUpFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, signUpFragment).commit();
+                //Cerrar fragment para evitar consumo de recursos
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(Objects.requireNonNull(getParentFragmentManager().findFragmentById(R.id.fragmentContainerView))).commit();
             }
         };
 

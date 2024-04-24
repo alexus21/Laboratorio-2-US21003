@@ -1,4 +1,4 @@
-package com.example.laboratorio2us21003.fragments;
+package com.example.laboratorio2us21003.fragments.users;
 
 import android.os.Bundle;
 
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laboratorio2us21003.R;
+import com.example.laboratorio2us21003.fragments.home.HomeFragment;
 
 import java.util.Objects;
 

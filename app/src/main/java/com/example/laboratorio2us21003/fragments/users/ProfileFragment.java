@@ -1,4 +1,4 @@
-package com.example.laboratorio2us21003.fragments;
+package com.example.laboratorio2us21003.fragments.users;
 
 import android.os.Bundle;
 

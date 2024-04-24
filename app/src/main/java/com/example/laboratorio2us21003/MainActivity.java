@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 
-import com.example.laboratorio2us21003.fragments.LoginFragment;
+import com.example.laboratorio2us21003.fragments.users.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 

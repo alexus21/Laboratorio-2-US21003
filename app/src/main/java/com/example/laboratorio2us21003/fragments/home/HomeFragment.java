@@ -1,4 +1,4 @@
-package com.example.laboratorio2us21003.fragments;
+package com.example.laboratorio2us21003.fragments.home;
 
 import android.os.Bundle;
 

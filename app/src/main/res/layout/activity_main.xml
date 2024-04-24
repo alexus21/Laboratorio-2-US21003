@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.laboratorio2us21003.fragments.LoginFragment"
+        android:name="com.example.laboratorio2us21003.fragments.users.LoginFragment"
         android:layout_width="415dp"
         android:layout_height="732dp"
         tools:layout_editor_absoluteX="-4dp"

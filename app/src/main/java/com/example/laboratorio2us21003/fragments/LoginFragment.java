@@ -110,21 +110,21 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
-            if(username.isEmpty()) {
+            if (username.isEmpty()) {
                 Toast.makeText(getContext(), "Por favor, ingresa tu nombre de usuario", Toast.LENGTH_SHORT).show();
                 editTextLoginUsername.setError("Campo requerido");
                 return;
             }
 
-            if(password.isEmpty()) {
+            if (password.isEmpty()) {
                 Toast.makeText(getContext(), "Por favor, ingresa tu contraseña", Toast.LENGTH_SHORT).show();
                 editTextLoginPassword.setError("Campo requerido");
                 return;
             }
 
-            if(username.equals("admin") && password.equals("admin")) {
-                Fragment profileFragment = new ProfileFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, profileFragment).commit();
+            if (username.equals("admin") && password.equals("admin")) {
+                Fragment homeFragment = new HomeFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
                 //Cerrar fragment para evitar consumo de recursos
                 requireActivity().getSupportFragmentManager().beginTransaction().remove(Objects.requireNonNull(getParentFragmentManager().findFragmentById(R.id.fragmentContainerView))).commit();
             } else {

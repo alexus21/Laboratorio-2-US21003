@@ -17,7 +17,7 @@
         android:icon="@drawable/report"
         android:title="Reportes" />
     <item
-        android:id="@+id/mi_perfil"
+        android:id="@+id/my_profile"
         android:icon="@drawable/user_circle"
         android:title="Mi perfil" />
 </menu>

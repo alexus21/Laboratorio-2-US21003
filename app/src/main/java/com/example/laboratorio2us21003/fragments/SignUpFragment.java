@@ -76,12 +76,12 @@ public class SignUpFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
-        editTextFullNameSignUp = root.findViewById(R.id.editTextFullNameSignUp);
-        editTextUsernameSignUp = root.findViewById(R.id.editTextUsernameSignUp);
-        editTextPhoneNumberSignUp = root.findViewById(R.id.editTextPhoneNumberSignUp);
-        editTextTextPassword = root.findViewById(R.id.editTextTextPassword);
-        editTextTextPassword2 = root.findViewById(R.id.editTextTextPassword2);
-        buttonSignUp = root.findViewById(R.id.buttonSignUp);
+        editTextFullNameSignUp = root.findViewById(R.id.editTextFullNameUserProfile);
+        editTextUsernameSignUp = root.findViewById(R.id.editTextUsernameUserProfile);
+        editTextPhoneNumberSignUp = root.findViewById(R.id.editTextPhoneNumberUserProfile);
+        editTextTextPassword = root.findViewById(R.id.editTextTextPasswordUserProfile);
+        editTextTextPassword2 = root.findViewById(R.id.editTextTextPassword2UserProfile);
+        buttonSignUp = root.findViewById(R.id.buttonUpdateProfile);
         textViewBottomMessageLogin = root.findViewById(R.id.textViewBottomMessageLogin);
 
         spannableString = new SpannableString("Iniciar sesión");

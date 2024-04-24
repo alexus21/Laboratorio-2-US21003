@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.laboratorio2us21003.R;
 
@@ -25,6 +28,8 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public EditText editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile, editTextTextPasswordUserProfile, editTextTextPassword2UserProfile;
+    public Button buttonUpdateProfile;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -61,6 +66,31 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        editTextFullNameUserProfile = root.findViewById(R.id.editTextFullNameUserProfile);
+        editTextUsernameUserProfile = root.findViewById(R.id.editTextUsernameUserProfile);
+        editTextPhoneNumberUserProfile = root.findViewById(R.id.editTextPhoneNumberUserProfile);
+        editTextTextPasswordUserProfile = root.findViewById(R.id.editTextTextPasswordUserProfile);
+        editTextTextPassword2UserProfile = root.findViewById(R.id.editTextTextPassword2UserProfile);
+        buttonUpdateProfile = root.findViewById(R.id.buttonUpdateProfile);
+
+        buttonUpdateProfile.setOnClickListener(v -> {
+            String fullName = editTextFullNameUserProfile.getText().toString();
+            String username = editTextUsernameUserProfile.getText().toString();
+            String phoneNumber = editTextPhoneNumberUserProfile.getText().toString();
+            String password = editTextTextPasswordUserProfile.getText().toString();
+            String password2 = editTextTextPassword2UserProfile.getText().toString();
+
+            if (fullName.isEmpty() || username.isEmpty() || phoneNumber.isEmpty() || password.isEmpty() || password2.isEmpty()) {
+                Toast.makeText(getContext(), "Todos los campos son requeridos", Toast.LENGTH_SHORT).show();
+            } else if (!password.equals(password2)) {
+                Toast.makeText(getContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Perfil actualizado", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return root;
     }
 }

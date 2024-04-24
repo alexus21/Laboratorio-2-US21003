@@ -123,8 +123,10 @@ public class LoginFragment extends Fragment {
             }
 
             if(username.equals("admin") && password.equals("admin")) {
-                Toast.makeText(getContext(), "Bienvenido, " + username, Toast.LENGTH_SHORT).show();
-//                textViewBottomMessage.setText("Bienvenido, " + username);
+                Fragment profileFragment = new ProfileFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, profileFragment).commit();
+                //Cerrar fragment para evitar consumo de recursos
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(Objects.requireNonNull(getParentFragmentManager().findFragmentById(R.id.fragmentContainerView))).commit();
             } else {
                 Toast.makeText(getContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
             }

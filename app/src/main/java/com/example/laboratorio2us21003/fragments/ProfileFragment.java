@@ -84,8 +84,15 @@ public class ProfileFragment extends Fragment {
 
             if (fullName.isEmpty() || username.isEmpty() || phoneNumber.isEmpty() || password.isEmpty() || password2.isEmpty()) {
                 Toast.makeText(getContext(), "Todos los campos son requeridos", Toast.LENGTH_SHORT).show();
+                editTextFullNameUserProfile.setError("Campo requerido");
+                editTextUsernameUserProfile.setError("Campo requerido");
+                editTextPhoneNumberUserProfile.setError("Campo requerido");
+                editTextTextPasswordUserProfile.setError("Campo requerido");
+                editTextTextPassword2UserProfile.setError("Campo requerido");
             } else if (!password.equals(password2)) {
                 Toast.makeText(getContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                editTextTextPasswordUserProfile.setError("Las contraseñas no coinciden");
+                editTextTextPassword2UserProfile.setError("Las contraseñas no coinciden");
             } else {
                 Toast.makeText(getContext(), "Perfil actualizado", Toast.LENGTH_SHORT).show();
             }

@@ -2,11 +2,18 @@ package com.example.laboratorio2us21003.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.laboratorio2us21003.R;
 
@@ -25,6 +32,11 @@ public class LoginFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public EditText editTextLoginUsername, editTextLoginPassword;
+    public Button buttonLogin;
+    public TextView textViewBottomMessage;
+    SpannableString spannableString;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -58,9 +70,61 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View root = inflater.inflate(R.layout.fragment_login, container, false);
+
+        editTextLoginUsername = root.findViewById(R.id.editTextLoginUsername);
+        editTextLoginPassword = root.findViewById(R.id.editTextLoginPassword);
+        buttonLogin = root.findViewById(R.id.buttonLogin);
+        textViewBottomMessage = root.findViewById(R.id.textViewBottomMessage);
+        spannableString = new SpannableString("¿No tienes una cuenta? Regístrate aquí");
+
+        int startIndex = spannableString.toString().indexOf("Regístrate aquí");
+        int endIndex = startIndex + "Regístrate aquí".length();
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Toast.makeText(getContext(), "Redirigiendo a la página de registro", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, startIndex, endIndex, 0);
+        textViewBottomMessage.setText(spannableString);
+        textViewBottomMessage.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+
+        buttonLogin.setOnClickListener(v -> {
+            String username = editTextLoginUsername.getText().toString();
+            String password = editTextLoginPassword.getText().toString();
+
+            if (username.isEmpty() && password.isEmpty()) {
+                Toast.makeText(getContext(), "Por favor, ingresa tus credenciales", Toast.LENGTH_SHORT).show();
+                editTextLoginUsername.setError("Campo requerido");
+                editTextLoginPassword.setError("Campo requerido");
+                return;
+            }
+
+            if(username.isEmpty()) {
+                Toast.makeText(getContext(), "Por favor, ingresa tu nombre de usuario", Toast.LENGTH_SHORT).show();
+                editTextLoginUsername.setError("Campo requerido");
+                return;
+            }
+
+            if(password.isEmpty()) {
+                Toast.makeText(getContext(), "Por favor, ingresa tu contraseña", Toast.LENGTH_SHORT).show();
+                editTextLoginPassword.setError("Campo requerido");
+                return;
+            }
+
+            if(username.equals("admin") && password.equals("admin")) {
+                Toast.makeText(getContext(), "Bienvenido, " + username, Toast.LENGTH_SHORT).show();
+//                textViewBottomMessage.setText("Bienvenido, " + username);
+            } else {
+                Toast.makeText(getContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return root;
     }
 }

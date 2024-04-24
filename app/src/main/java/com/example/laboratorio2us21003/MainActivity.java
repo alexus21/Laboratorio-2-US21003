@@ -7,8 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+
+import com.example.laboratorio2us21003.fragments.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    Fragment fragmentLogin;
+    FragmentContainerView fragmentContainerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +27,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        fragmentLogin = new LoginFragment();
+        fragmentContainerView = findViewById(R.id.fragmentContainerView);
+
+        getSupportFragmentManager().beginTransaction().replace(fragmentContainerView.getId(), fragmentLogin).commit();
+
+
     }
 }

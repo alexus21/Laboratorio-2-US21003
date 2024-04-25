@@ -9,9 +9,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
 import com.example.laboratorio2us21003.activities.user.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static AppDatabase appDatabase;
+    public IUsersDAO usersDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        AppDatabase database = DatabaseSingleton.getDatabase(this);
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }

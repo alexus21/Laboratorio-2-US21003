@@ -17,10 +17,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.laboratorio2us21003.AppDatabase;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
+import com.example.laboratorio2us21003.MainActivity;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
-
-import java.util.Objects;
+import com.example.laboratorio2us21003.models.Users;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -28,6 +31,8 @@ public class SignUpActivity extends AppCompatActivity {
     public Button buttonSignUp;
     public TextView textViewBottomMessageLogin;
     SpannableString spannableString;
+    public IUsersDAO usersDAO;
+    MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +119,22 @@ public class SignUpActivity extends AppCompatActivity {
                 editTextTextPassword.setError("Las contraseñas no coinciden");
                 editTextTextPassword2.setError("Las contraseñas no coinciden");
                 return;
+            }
+
+            AppDatabase database = DatabaseSingleton.getDatabase(this);
+            usersDAO = database.getUsersDAO();
+
+            Users user = new Users();
+            user.fullname = fullName;
+            user.phone = phoneNumber;
+            user.username = username;
+            user.password = password;
+
+            usersDAO.insertUser(user);
+
+            //Mostrar en logcat los usuarios registrados
+            for (Users u : usersDAO.getUsers()) {
+                System.out.println(u.fullname + " " + u.phone + " " + u.username + " " + u.password);
             }
 
             editTextFullNameSignUp.setText("");

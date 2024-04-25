@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.categories.Category;
 import com.example.laboratorio2us21003.activities.categories.EditCategoryInformationActivity;
-import com.example.laboratorio2us21003.activities.maintenances.EditMaintenanceInformationActivity;
 
 import java.util.ArrayList;
 

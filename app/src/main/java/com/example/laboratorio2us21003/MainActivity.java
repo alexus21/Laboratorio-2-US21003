@@ -1,5 +1,6 @@
 package com.example.laboratorio2us21003;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 
-import com.example.laboratorio2us21003.fragments.users.LoginFragment;
+import com.example.laboratorio2us21003.activities.user.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,9 +29,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        fragmentLogin = new LoginFragment();
-        fragmentContainerView = findViewById(R.id.fragmentContainerView);
-
-        getSupportFragmentManager().beginTransaction().replace(fragmentContainerView.getId(), fragmentLogin).commit();
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
     }
 }

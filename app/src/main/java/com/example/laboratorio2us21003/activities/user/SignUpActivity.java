@@ -1,0 +1,132 @@
+package com.example.laboratorio2us21003.activities.user;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+
+import com.example.laboratorio2us21003.R;
+import com.example.laboratorio2us21003.fragments.home.HomeFragment;
+import com.example.laboratorio2us21003.fragments.users.LoginFragment;
+
+import java.util.Objects;
+
+public class SignUpActivity extends AppCompatActivity {
+
+    public EditText editTextFullNameSignUp, editTextUsernameSignUp, editTextPhoneNumberSignUp, editTextTextPassword, editTextTextPassword2;
+    public Button buttonSignUp;
+    public TextView textViewBottomMessageLogin;
+    SpannableString spannableString;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_sign_up);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        editTextFullNameSignUp = findViewById(R.id.editTextFullNameUserProfile);
+        editTextUsernameSignUp = findViewById(R.id.editTextUsernameUserProfile);
+        editTextPhoneNumberSignUp = findViewById(R.id.editTextPhoneNumberUserProfile);
+        editTextTextPassword = findViewById(R.id.editTextTextPasswordUserProfile);
+        editTextTextPassword2 = findViewById(R.id.editTextTextPassword2UserProfile);
+        buttonSignUp = findViewById(R.id.buttonUpdateProfile);
+        textViewBottomMessageLogin = findViewById(R.id.textViewBottomMessageLogin);
+
+        spannableString = new SpannableString("Iniciar sesión");
+
+        int startIndex = spannableString.toString().indexOf("Iniciar sesión");
+        int endIndex = startIndex + "Iniciar sesión".length();
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, startIndex, endIndex, 0);
+        textViewBottomMessageLogin.setText(spannableString);
+        textViewBottomMessageLogin.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+
+        buttonSignUp.setOnClickListener(v -> {
+            String fullName = editTextFullNameSignUp.getText().toString();
+            String username = editTextUsernameSignUp.getText().toString();
+            String phoneNumber = editTextPhoneNumberSignUp.getText().toString();
+            String password = editTextTextPassword.getText().toString();
+            String password2 = editTextTextPassword2.getText().toString();
+
+            if (fullName.isEmpty()) {
+                Toast.makeText(this, "Ingrese su nombre completo", Toast.LENGTH_SHORT).show();
+                editTextFullNameSignUp.setError("Campo requerido");
+                return;
+            }
+
+            if (phoneNumber.isEmpty()) {
+                Toast.makeText(this, "Ingrese su número de teléfono", Toast.LENGTH_SHORT).show();
+                editTextPhoneNumberSignUp.setError("Campo requerido");
+                return;
+            }
+
+            if (username.isEmpty()) {
+                Toast.makeText(this, "Ingrese su nombre de usuario", Toast.LENGTH_SHORT).show();
+                editTextUsernameSignUp.setError("Campo requerido");
+                return;
+            }
+
+            if (password.isEmpty()) {
+                Toast.makeText(this, "Ingrese su contraseña", Toast.LENGTH_SHORT).show();
+                editTextTextPassword.setError("Campo requerido");
+                return;
+            }
+
+            if (password2.isEmpty()) {
+                Toast.makeText(this, "Confirme su contraseña", Toast.LENGTH_SHORT).show();
+                editTextTextPassword2.setError("Campo requerido");
+                return;
+            }
+
+            if(password.length() < 5) {
+                Toast.makeText(this, "La contraseña debe tener al menos 5 caracteres", Toast.LENGTH_SHORT).show();
+                editTextTextPassword.setError("La contraseña debe tener al menos 8 caracteres");
+                return;
+            }
+
+            if (!password.equals(password2)) {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                editTextTextPassword.setError("Las contraseñas no coinciden");
+                editTextTextPassword2.setError("Las contraseñas no coinciden");
+                return;
+            }
+
+            editTextFullNameSignUp.setText("");
+            editTextUsernameSignUp.setText("");
+            editTextPhoneNumberSignUp.setText("");
+            editTextTextPassword.setText("");
+            editTextTextPassword2.setText("");
+            Toast.makeText(this, "Usuario registrado", Toast.LENGTH_SHORT).show();
+            Intent homeIntent = new Intent(SignUpActivity.this, HomeFragment.class);
+            startActivity(homeIntent);
+            finish();
+        });
+    }
+}

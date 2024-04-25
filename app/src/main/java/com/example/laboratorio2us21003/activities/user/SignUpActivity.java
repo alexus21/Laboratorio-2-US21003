@@ -16,11 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 
 import com.example.laboratorio2us21003.R;
-import com.example.laboratorio2us21003.fragments.home.HomeFragment;
-import com.example.laboratorio2us21003.fragments.users.LoginFragment;
+import com.example.laboratorio2us21003.activities.home.HomeActivity;
 
 import java.util.Objects;
 
@@ -124,7 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
             editTextTextPassword.setText("");
             editTextTextPassword2.setText("");
             Toast.makeText(this, "Usuario registrado", Toast.LENGTH_SHORT).show();
-            Intent homeIntent = new Intent(SignUpActivity.this, HomeFragment.class);
+            Intent homeIntent = new Intent(SignUpActivity.this, HomeActivity.class);
             startActivity(homeIntent);
             finish();
         });

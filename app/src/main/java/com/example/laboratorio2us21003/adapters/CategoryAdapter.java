@@ -29,12 +29,12 @@ public class CategoryAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return listCategories.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return listCategories.get(position);
     }
 
     @Override

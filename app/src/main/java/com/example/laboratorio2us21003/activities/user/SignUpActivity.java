@@ -67,11 +67,11 @@ public class SignUpActivity extends AppCompatActivity {
         textViewBottomMessageLogin.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 
         buttonSignUp.setOnClickListener(v -> {
-            String fullName = editTextFullNameSignUp.getText().toString();
-            String username = editTextUsernameSignUp.getText().toString();
-            String phoneNumber = editTextPhoneNumberSignUp.getText().toString();
-            String password = editTextTextPassword.getText().toString();
-            String password2 = editTextTextPassword2.getText().toString();
+            String fullName = editTextFullNameSignUp.getText().toString().trim();
+            String username = editTextUsernameSignUp.getText().toString().trim();
+            String phoneNumber = editTextPhoneNumberSignUp.getText().toString().trim();
+            String password = editTextTextPassword.getText().toString().trim();
+            String password2 = editTextTextPassword2.getText().toString().trim();
 
             if (fullName.isEmpty()) {
                 Toast.makeText(this, "Ingrese su nombre completo", Toast.LENGTH_SHORT).show();

@@ -66,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         textViewBottomMessage.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 
         buttonLogin.setOnClickListener(v -> {
-            String username = editTextLoginUsername.getText().toString();
-            String password = editTextLoginPassword.getText().toString();
+            String username = editTextLoginUsername.getText().toString().trim();
+            String password = editTextLoginPassword.getText().toString().trim();
 
             if (username.isEmpty() && password.isEmpty()) {
                 Toast.makeText(this, "Por favor, ingresa tus credenciales", Toast.LENGTH_SHORT).show();

@@ -7,4 +7,107 @@
     android:layout_height="match_parent"
     tools:context=".activities.vehicles.AddNewVehicleActivity">
 
+    <TextView
+        android:id="@+id/textViewAddNewVehicleTopMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Registrar un nuevo vehículo"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editTextNewPlateNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Número de placa"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddNewVehicleTopMessage"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editTextNewBrandName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Nombre de la marca: "
+        android:textAlignment="center"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewPlateNumber"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editTextNewFuelType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Tipo de combustible: "
+        android:textAlignment="center"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewBrandName"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editTextNewColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Color: "
+        android:textAlignment="center"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewFuelType"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editTextNewYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Año: "
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewColor"
+        tools:layout_editor_absoluteX="94dp" />
+
+    <EditText
+        android:id="@+id/editTextNewTotalPassengers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Cantidad de pasajeros: "
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewYear"
+        tools:layout_editor_absoluteX="91dp" />
+
+    <Button
+        android:id="@+id/buttonRegisterNewVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="Registrar vehículo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewTotalPassengers"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/buttonCancell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Cancelar registro"
+        android:backgroundTint="@android:color/holo_red_dark"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterNewVehicle"
+        tools:layout_editor_absoluteX="151dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,8 +54,8 @@ public class MaintenanceAdapter extends BaseAdapter {
         TextView textViewMaintenanceCategory = convertView.findViewById(R.id.textViewMaintenanceCategory);
         TextView textViewMaintenanceCar = convertView.findViewById(R.id.textViewMaintenanceCar);
 
-        ImageView imageViewEditMaintenance = convertView.findViewById(R.id.imageViewEditMaintenance);
-        ImageView imageViewDeleteMaintenance = convertView.findViewById(R.id.imageViewDeleteMaintenance);
+        ImageView imageViewEditMaintenance = convertView.findViewById(R.id.imageViewEditCategory);
+        ImageView imageViewDeleteMaintenance = convertView.findViewById(R.id.imageViewDeleteCategory);
 
         imageViewDeleteMaintenance.setOnClickListener(v -> {
             listMaintenances.remove(position);

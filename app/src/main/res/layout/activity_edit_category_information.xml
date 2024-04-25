@@ -7,4 +7,59 @@
     android:layout_height="match_parent"
     tools:context=".activities.categories.EditCategoryInformationActivity">
 
+    <EditText
+        android:id="@+id/editTextEditCategory"
+        android:layout_width="248dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:hint="Categoría"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/imageView20"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/poll_icon"
+        tools:layout_editor_absoluteX="16dp"
+        app:tint="#00CC22"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Editar categoría"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/buttonEditCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="452dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="Editar categoría"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditCategory"
+        tools:layout_editor_absoluteX="151dp" />
+
+    <Button
+        android:id="@+id/buttonCancellCategoryEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Cancelar"
+        android:backgroundTint="@android:color/holo_red_dark"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEditCategory"
+        tools:layout_editor_absoluteX="151dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

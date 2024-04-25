@@ -58,8 +58,8 @@ public class VehiclesAdapter extends BaseAdapter {
         TextView textViewYear = convertView.findViewById(R.id.textViewMaintenanceCar);
         TextView textViewPassengers = convertView.findViewById(R.id.textViewPassengers);
 
-        ImageView imageViewEdit = convertView.findViewById(R.id.imageViewEditMaintenance);
-        ImageView imageViewDelete = convertView.findViewById(R.id.imageViewDeleteMaintenance);
+        ImageView imageViewEdit = convertView.findViewById(R.id.imageViewEditCategory);
+        ImageView imageViewDelete = convertView.findViewById(R.id.imageViewDeleteCategory);
 
         imageViewDelete.setOnClickListener(v -> {
             listVehicles.remove(vehiclesList);

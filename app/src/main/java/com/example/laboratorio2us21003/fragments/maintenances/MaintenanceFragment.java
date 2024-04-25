@@ -1,5 +1,6 @@
 package com.example.laboratorio2us21003.fragments.maintenances;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.laboratorio2us21003.R;
+import com.example.laboratorio2us21003.activities.maintenances.AddNewMaintenanceActivity;
+import com.example.laboratorio2us21003.activities.maintenances.Maintenances;
+import com.example.laboratorio2us21003.activities.vehicles.Vehicles;
+import com.example.laboratorio2us21003.adapters.MaintenanceAdapter;
+import com.example.laboratorio2us21003.adapters.VehiclesAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +35,10 @@ public class MaintenanceFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public ImageView imageViewNewMaintenance;
+    public ListView listViewMaintenances;
+    public ArrayList<Maintenances> maintenancesArrayList;
+    MaintenanceAdapter maintenanceAdapter;
 
     public MaintenanceFragment() {
         // Required empty public constructor
@@ -61,6 +75,27 @@ public class MaintenanceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maintenance, container, false);
+        View root = inflater.inflate(R.layout.fragment_maintenance, container, false);
+        listViewMaintenances = root.findViewById(R.id.listViewMaintenances);
+        maintenancesArrayList = new ArrayList<>();
+
+        fillUpListView();
+
+        imageViewNewMaintenance = root.findViewById(R.id.imageViewNewMaintenance);
+        imageViewNewMaintenance.setOnClickListener(v -> {
+            Intent newMaintenanceIntent = new Intent(getActivity(), AddNewMaintenanceActivity.class);
+            startActivity(newMaintenanceIntent);
+        });
+
+        return root;
+    }
+
+    void fillUpListView(){
+        maintenancesArrayList.add(new Maintenances( "Preventivo", 180, "XD", 2, 1));
+        maintenancesArrayList.add(new Maintenances( "Reparación", 250, "XD", 3, 2));
+        maintenancesArrayList.add(new Maintenances( "ALV", 180, "XD", 4, 3));
+
+        maintenanceAdapter = new MaintenanceAdapter(getActivity(), maintenancesArrayList, R.layout.item_maintenance_list);
+        listViewMaintenances.setAdapter(maintenanceAdapter);
     }
 }

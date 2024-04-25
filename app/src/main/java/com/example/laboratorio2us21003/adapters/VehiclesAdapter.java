@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,15 +51,15 @@ public class VehiclesAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.item_vehicle_list, null);
         Vehicles vehiclesList = listVehicles.get(position);
 
-        TextView textViewPlateNumber = convertView.findViewById(R.id.textViewPlateNumber);
-        TextView textViewBrandName = convertView.findViewById(R.id.textViewBrandName);
-        TextView textViewFuelType = convertView.findViewById(R.id.textViewFuelType);
-        TextView textViewColor = convertView.findViewById(R.id.textViewColor);
-        TextView textViewYear = convertView.findViewById(R.id.textViewYear);
+        TextView textViewPlateNumber = convertView.findViewById(R.id.textViewMaintenanceDate);
+        TextView textViewBrandName = convertView.findViewById(R.id.textViewMaintenanceCost);
+        TextView textViewFuelType = convertView.findViewById(R.id.textViewMaintenanceDescription);
+        TextView textViewColor = convertView.findViewById(R.id.textViewMaintenanceCategory);
+        TextView textViewYear = convertView.findViewById(R.id.textViewMaintenanceCar);
         TextView textViewPassengers = convertView.findViewById(R.id.textViewPassengers);
 
-        ImageView imageViewEdit = convertView.findViewById(R.id.imageViewEdit);
-        ImageView imageViewDelete = convertView.findViewById(R.id.imageViewDelete);
+        ImageView imageViewEdit = convertView.findViewById(R.id.imageViewEditMaintenance);
+        ImageView imageViewDelete = convertView.findViewById(R.id.imageViewDeleteMaintenance);
 
         imageViewDelete.setOnClickListener(v -> {
             listVehicles.remove(vehiclesList);

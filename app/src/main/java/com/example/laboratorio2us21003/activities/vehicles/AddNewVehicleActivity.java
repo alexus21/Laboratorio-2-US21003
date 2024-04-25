@@ -15,10 +15,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
 
+import java.util.ArrayList;
+
 public class AddNewVehicleActivity extends AppCompatActivity {
 
     public EditText editTextNewPlateNumber, editTextNewBrandName, editTextNewFuelType, editTextNewColor, editTextNewYear, editTextNewTotalPassengers;
     public Button buttonRegisterNewVehicle, buttonCancell;
+    public ArrayList<Vehicles> vehiclesArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +34,14 @@ public class AddNewVehicleActivity extends AppCompatActivity {
             return insets;
         });
 
-        editTextNewPlateNumber = findViewById(R.id.editTextNewPlateNumber);
-        editTextNewBrandName = findViewById(R.id.editTextNewBrandName);
-        editTextNewFuelType = findViewById(R.id.editTextNewFuelType);
-        editTextNewColor = findViewById(R.id.editTextNewColor);
-        editTextNewYear = findViewById(R.id.editTextNewYear);
-        editTextNewTotalPassengers = findViewById(R.id.editTextNewTotalPassengers);
-        buttonRegisterNewVehicle = findViewById(R.id.buttonRegisterNewVehicle);
-        buttonCancell = findViewById(R.id.buttonCancell);
+        editTextNewPlateNumber = findViewById(R.id.editTextEditPlateNumber);
+        editTextNewBrandName = findViewById(R.id.editTextEditBrandName);
+        editTextNewFuelType = findViewById(R.id.editTextEditFuelType);
+        editTextNewColor = findViewById(R.id.editTextEditColor);
+        editTextNewYear = findViewById(R.id.editTextEditYear);
+        editTextNewTotalPassengers = findViewById(R.id.editTextEditTotalPassengers);
+        buttonRegisterNewVehicle = findViewById(R.id.buttonRegisterEditVehicle);
+        buttonCancell = findViewById(R.id.buttonCancellEdit);
 
         buttonCancell.setOnClickListener(v -> {
             editTextNewPlateNumber.setText("");
@@ -84,6 +87,8 @@ public class AddNewVehicleActivity extends AppCompatActivity {
                 editTextNewTotalPassengers.setError("Campo requerido");
                 return;
             }
+
+            Vehicles newVehicle = new Vehicles(plateNumber, brandName, fuelType, color, Integer.parseInt(year), Integer.parseInt(totalPassengers));
 
             Toast.makeText(this, "Vehiculo registrado exitosamente", Toast.LENGTH_SHORT).show();
             editTextNewPlateNumber.setText("");

@@ -8,11 +8,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.vehicles.AddNewVehicleActivity;
+import com.example.laboratorio2us21003.activities.vehicles.Vehicles;
+import com.example.laboratorio2us21003.adapters.VehiclesAdapter;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -31,6 +36,9 @@ public class VehiclesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     public ImageView imageViewAddNewVehicle;
+    public ListView listViewVehicles;
+    public ArrayList<Vehicles> vehiclesArrayList;
+    VehiclesAdapter vehiclesAdapter;
 
     public VehiclesFragment() {
         // Required empty public constructor
@@ -68,6 +76,12 @@ public class VehiclesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_vehicles, container, false);
+
+        listViewVehicles = root.findViewById(R.id.listViewVehicles);
+        vehiclesArrayList = new ArrayList<>();
+
+        fillUpListView();
+
         imageViewAddNewVehicle = root.findViewById(R.id.imageViewAddNewVehicle);
 
         imageViewAddNewVehicle.setOnClickListener(v -> {
@@ -78,5 +92,14 @@ public class VehiclesFragment extends Fragment {
         });
 
         return root;
+    }
+
+    void fillUpListView() {
+        vehiclesArrayList.add(new Vehicles("P-123-456", "Toyota", "Gasolina", "Rojo", 2010, 5));
+        vehiclesArrayList.add(new Vehicles("P-789-456", "Nissan", "Gasolina", "Azul", 2015, 5));
+        vehiclesArrayList.add(new Vehicles("P-789-123", "Hyundai", "Gasolina", "Blanco", 2018, 5));
+
+        vehiclesAdapter = new VehiclesAdapter(requireActivity(), vehiclesArrayList, R.layout.item_vehicle_list);
+        listViewVehicles.setAdapter(vehiclesAdapter);
     }
 }

@@ -8,7 +8,7 @@
     tools:context=".activities.vehicles.AddNewVehicleActivity">
 
     <TextView
-        android:id="@+id/textViewAddNewVehicleTopMessage"
+        android:id="@+id/textViewEditVehicleTopMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
-        android:id="@+id/editTextNewPlateNumber"
+        android:id="@+id/editTextEditPlateNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -28,11 +28,11 @@
         android:hint="Número de placa"
         android:inputType="text"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddNewVehicleTopMessage"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditVehicleTopMessage"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
-        android:id="@+id/editTextNewBrandName"
+        android:id="@+id/editTextEditBrandName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -40,11 +40,11 @@
         android:hint="Nombre de la marca: "
         android:textAlignment="center"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewPlateNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditPlateNumber"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
-        android:id="@+id/editTextNewFuelType"
+        android:id="@+id/editTextEditFuelType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -52,11 +52,11 @@
         android:hint="Tipo de combustible: "
         android:textAlignment="center"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewBrandName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditBrandName"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
-        android:id="@+id/editTextNewColor"
+        android:id="@+id/editTextEditColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -64,11 +64,11 @@
         android:hint="Color: "
         android:textAlignment="center"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewFuelType"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditFuelType"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
-        android:id="@+id/editTextNewYear"
+        android:id="@+id/editTextEditYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -76,11 +76,11 @@
         android:inputType="number"
         android:hint="Año: "
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewColor"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditColor"
         tools:layout_editor_absoluteX="94dp" />
 
     <EditText
-        android:id="@+id/editTextNewTotalPassengers"
+        android:id="@+id/editTextEditTotalPassengers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -88,26 +88,26 @@
         android:inputType="number"
         android:hint="Cantidad de pasajeros: "
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewYear"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditYear"
         tools:layout_editor_absoluteX="91dp" />
 
     <Button
-        android:id="@+id/buttonRegisterNewVehicle"
+        android:id="@+id/buttonRegisterEditVehicle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:backgroundTint="@android:color/holo_green_dark"
         android:text="Registrar vehículo"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewTotalPassengers"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEditTotalPassengers"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/buttonCancell"
+        android:id="@+id/buttonCancellEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Cancelar registro"
         android:backgroundTint="@android:color/holo_red_dark"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterNewVehicle"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterEditVehicle"
         tools:layout_editor_absoluteX="151dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

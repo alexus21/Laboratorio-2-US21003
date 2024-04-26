@@ -1,14 +1,11 @@
 package com.example.laboratorio2us21003.fragments.users;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.laboratorio2us21003.AppDatabase;
 import com.example.laboratorio2us21003.DAO.IUsersDAO;
 import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.user.LoginActivity;
-import com.example.laboratorio2us21003.models.GetActiveUser;
-import com.example.laboratorio2us21003.models.Users;
+import com.example.laboratorio2us21003.models.users.GetActiveUser;
+import com.example.laboratorio2us21003.models.users.Users;
 
 import java.util.List;
 

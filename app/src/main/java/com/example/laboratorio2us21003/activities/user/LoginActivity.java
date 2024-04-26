@@ -22,7 +22,7 @@ import com.example.laboratorio2us21003.DAO.IUsersDAO;
 import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
-import com.example.laboratorio2us21003.models.GetUserID;
+import com.example.laboratorio2us21003.models.users.GetUserID;
 
 import java.util.List;
 

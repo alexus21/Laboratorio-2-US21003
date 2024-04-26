@@ -4,12 +4,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
-import com.example.laboratorio2us21003.models.GetActiveUser;
-import com.example.laboratorio2us21003.models.GetUserID;
-import com.example.laboratorio2us21003.models.UserNamePassword;
-import com.example.laboratorio2us21003.models.Users;
+import com.example.laboratorio2us21003.models.users.GetActiveUser;
+import com.example.laboratorio2us21003.models.users.GetUserID;
+import com.example.laboratorio2us21003.models.users.UserNamePassword;
+import com.example.laboratorio2us21003.models.users.Users;
 
 import java.util.List;
 

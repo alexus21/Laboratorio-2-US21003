@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,13 +18,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.laboratorio2us21003.AppDatabase;
 import com.example.laboratorio2us21003.DAO.IUsersDAO;
 import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.MainActivity;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
-import com.example.laboratorio2us21003.models.Users;
+import com.example.laboratorio2us21003.models.users.Users;
 
 public class SignUpActivity extends AppCompatActivity {
 

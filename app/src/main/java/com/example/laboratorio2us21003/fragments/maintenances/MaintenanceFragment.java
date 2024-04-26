@@ -14,9 +14,7 @@ import android.widget.ListView;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.maintenances.AddNewMaintenanceActivity;
 import com.example.laboratorio2us21003.activities.maintenances.Maintenances;
-import com.example.laboratorio2us21003.activities.vehicles.Vehicles;
 import com.example.laboratorio2us21003.adapters.MaintenanceAdapter;
-import com.example.laboratorio2us21003.adapters.VehiclesAdapter;
 
 import java.util.ArrayList;
 

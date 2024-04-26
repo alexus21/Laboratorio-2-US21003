@@ -2,6 +2,7 @@ package com.example.laboratorio2us21003.activities.vehicles;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,8 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DAO.IVehiclesDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
+import com.example.laboratorio2us21003.models.vehicles.Vehicles;
 
 import java.util.ArrayList;
 
@@ -22,6 +27,8 @@ public class AddNewVehicleActivity extends AppCompatActivity {
     public EditText editTextNewPlateNumber, editTextNewBrandName, editTextNewFuelType, editTextNewColor, editTextNewYear, editTextNewTotalPassengers;
     public Button buttonRegisterNewVehicle, buttonCancell;
     public ArrayList<Vehicles> vehiclesArrayList;
+    public IUsersDAO iUsersDAO;
+    public IVehiclesDAO iVehiclesDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +95,18 @@ public class AddNewVehicleActivity extends AppCompatActivity {
                 return;
             }
 
-            Vehicles newVehicle = new Vehicles(plateNumber, brandName, fuelType, color, Integer.parseInt(year), Integer.parseInt(totalPassengers));
+            iUsersDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getUsersDAO();
+            iVehiclesDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getVehiclesDAO();
+
+            int idUserSession = iUsersDAO.getIdUserSession();
+
+            Vehicles newVehicle = new Vehicles(plateNumber, brandName, fuelType, color,
+                    Integer.parseInt(year), Integer.parseInt(totalPassengers), idUserSession);
+            iVehiclesDAO.insertVehicle(newVehicle);
+
+            System.out.println(newVehicle.getLicensePlate() + newVehicle.getBrand()
+                    + newVehicle.getFuelType() + newVehicle.getVehicleColor()
+                    + newVehicle.getYear() + newVehicle.getPassengers() + newVehicle.getIdUser());
 
             Toast.makeText(this, "Vehiculo registrado exitosamente", Toast.LENGTH_SHORT).show();
             editTextNewPlateNumber.setText("");

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     SpannableString spannableString;
     public IUsersDAO usersDAO;
     MainActivity mainActivity;
+    public ImageView imageViewViewPassword, imageViewViewPassword2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class SignUpActivity extends AppCompatActivity {
         editTextTextPassword2 = findViewById(R.id.editTextTextPassword2UserProfile);
         buttonSignUp = findViewById(R.id.buttonUpdateProfile);
         textViewBottomMessageLogin = findViewById(R.id.textViewBottomMessageLogin);
+        imageViewViewPassword = findViewById(R.id.imageViewViewPassword);
+        imageViewViewPassword2 = findViewById(R.id.imageViewViewPassword2);
 
         spannableString = new SpannableString("Iniciar sesión");
 
@@ -72,6 +76,13 @@ public class SignUpActivity extends AppCompatActivity {
         textViewBottomMessageLogin.setText(spannableString);
         textViewBottomMessageLogin.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 
+        viewPassword(imageViewViewPassword, imageViewViewPassword2, editTextTextPassword, editTextTextPassword2);
+        signUp(buttonSignUp, editTextFullNameSignUp, editTextUsernameSignUp, editTextPhoneNumberSignUp, editTextTextPassword, editTextTextPassword2);
+
+    }
+
+    void signUp(Button buttonSignUp, EditText editTextFullNameSignUp, EditText editTextUsernameSignUp,
+                EditText editTextPhoneNumberSignUp, EditText editTextTextPassword, EditText editTextTextPassword2) {
         buttonSignUp.setOnClickListener(v -> {
             String fullName = editTextFullNameSignUp.getText().toString().trim();
             String username = editTextUsernameSignUp.getText().toString().trim();
@@ -109,13 +120,13 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
-            if(phoneNumber.length() < 8){
+            if (phoneNumber.length() < 8) {
                 Toast.makeText(this, "Número de teléfono con formato incorrecto", Toast.LENGTH_SHORT).show();
                 editTextPhoneNumberSignUp.setError("Número de teléfono con formato incorrecto");
                 return;
             }
 
-            if(password.length() < 5) {
+            if (password.length() < 5) {
                 Toast.makeText(this, "La contraseña debe tener al menos 5 caracteres", Toast.LENGTH_SHORT).show();
                 editTextTextPassword.setError("La contraseña debe tener al menos 8 caracteres");
                 return;
@@ -157,6 +168,26 @@ public class SignUpActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(SignUpActivity.this, HomeActivity.class);
             startActivity(homeIntent);
             finish();
+        });
+    }
+
+    void viewPassword(ImageView imageViewViewPassword, ImageView imageViewViewPassword2, EditText editTextTextPasswordUserProfile, EditText editTextTextPassword2UserProfile) {
+        final boolean[] isPasswordVisible = {false};
+
+        imageViewViewPassword.setOnClickListener(v -> {
+            if (editTextTextPasswordUserProfile.getInputType() == 129) {
+                editTextTextPasswordUserProfile.setInputType(1);
+            } else {
+                editTextTextPasswordUserProfile.setInputType(129);
+            }
+        });
+
+        imageViewViewPassword2.setOnClickListener(v -> {
+            if (editTextTextPassword2UserProfile.getInputType() == 129) {
+                editTextTextPassword2UserProfile.setInputType(1);
+            } else {
+                editTextTextPassword2UserProfile.setInputType(129);
+            }
         });
     }
 }

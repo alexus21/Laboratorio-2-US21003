@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,6 +109,12 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
+            if(phoneNumber.length() < 8){
+                Toast.makeText(this, "Número de teléfono con formato incorrecto", Toast.LENGTH_SHORT).show();
+                editTextPhoneNumberSignUp.setError("Número de teléfono con formato incorrecto");
+                return;
+            }
+
             if(password.length() < 5) {
                 Toast.makeText(this, "La contraseña debe tener al menos 5 caracteres", Toast.LENGTH_SHORT).show();
                 editTextTextPassword.setError("La contraseña debe tener al menos 8 caracteres");
@@ -123,7 +130,17 @@ public class SignUpActivity extends AppCompatActivity {
 
             usersDAO = DatabaseSingleton.getDatabase(this).getUsersDAO();
 
-            Users user = new Users(fullName, username, password, phoneNumber);
+            for (Users u : usersDAO.getUsers()) {
+                if (u.username.equals(username)) {
+                    Toast.makeText(this, "El nombre de usuario ya existe", Toast.LENGTH_SHORT).show();
+                    editTextUsernameSignUp.setError("El nombre de usuario ya existe");
+                    return;
+                }
+            }
+
+            usersDAO = DatabaseSingleton.getDatabase(this).getUsersDAO();
+
+            Users user = new Users(fullName, phoneNumber, username, password, 1);
             usersDAO.insertUser(user);
 
             //Mostrar en logcat los usuarios registrados

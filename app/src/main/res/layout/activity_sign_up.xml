@@ -66,7 +66,7 @@
             android:fontFamily="@font/roboto"
             android:hint="Teléfono (Ej: 71727374)"
             android:inputType="phone"
-            android:maxLength="8"
+            android:maxLength="15"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextFullNameUserProfile" />
@@ -158,7 +158,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/imageViewViewPassword"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="36dp"
@@ -169,7 +169,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
         <ImageView
-            android:id="@+id/imageView12"
+            android:id="@+id/imageViewViewPassword2"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
@@ -177,7 +177,7 @@
             app:layout_constraintEnd_toStartOf="@+id/editTextTextPassword2UserProfile"
             app:layout_constraintHorizontal_bias="0.31"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewViewPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

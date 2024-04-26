@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.activities.home.HomeActivity;
 import com.example.laboratorio2us21003.activities.user.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +30,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         AppDatabase database = DatabaseSingleton.getDatabase(this);
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(loginIntent);
+        usersDAO = database.getUsersDAO();
+
+        if(usersDAO.getIdUserSession() == 1) {
+            Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(homeIntent);
+        }
+        else{
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
     }
 }

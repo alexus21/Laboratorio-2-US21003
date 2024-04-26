@@ -29,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String loggedInUsername = getIntent().getStringExtra("loggedInUsername");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 

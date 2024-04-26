@@ -6,6 +6,9 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.laboratorio2us21003.models.GetActiveUser;
+import com.example.laboratorio2us21003.models.GetUserID;
+import com.example.laboratorio2us21003.models.UserNamePassword;
 import com.example.laboratorio2us21003.models.Users;
 
 import java.util.List;
@@ -15,17 +18,33 @@ public interface IUsersDAO {
     @Query("SELECT * FROM Users")
     List<Users> getUsers();
 
+    @Query("SELECT fullname, phone, username, password FROM Users WHERE sessionStatus = 1")
+    List<GetActiveUser> getActiveUser();
+
+    @Query("SELECT idUser FROM Users WHERE username = :username AND password = :password")
+    List<GetUserID> getIdUsers(String username, String password);
+
     @Insert
     void insertUser(Users user);
 
-    @Query("SELECT * FROM Users WHERE username = :username AND password = :password")
-    Users getUser(String username, String password);
+    @Query("SELECT username, password FROM Users WHERE username = :username AND password = :password")
+    UserNamePassword getUser(String username, String password);
 
     @Query("SELECT * FROM Users WHERE username = :username")
     Users getUserByUsername(String username);
 
-    @Update
-    void updateUser(Users user);
+    @Query("Update Users SET fullname = :fullname, phone = :phone, username = :username, password = :password WHERE idUser = :idUser")
+    void updateUser(String fullname, String phone, String username, String password, int idUser);
+
+    @Query("UPDATE Users SET sessionStatus = 1 WHERE idUser = :idUser")
+    void loginUser(int idUser);
+
+    @Query("UPDATE Users SET sessionStatus = 0 WHERE idUser = :idUser")
+    void logoutUser(int idUser);
+
+    //Query para obtener el id del usuario que esta en sesion
+    @Query("SELECT idUser FROM Users WHERE sessionStatus = 1")
+    int getIdUserSession();
 
     @Delete
     void deleteUser(Users user);

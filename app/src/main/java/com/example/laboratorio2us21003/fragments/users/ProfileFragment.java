@@ -1,21 +1,28 @@
 package com.example.laboratorio2us21003.fragments.users;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.laboratorio2us21003.AppDatabase;
 import com.example.laboratorio2us21003.DAO.IUsersDAO;
 import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
+import com.example.laboratorio2us21003.activities.user.LoginActivity;
+import com.example.laboratorio2us21003.models.GetActiveUser;
 import com.example.laboratorio2us21003.models.Users;
 
 import java.util.List;
@@ -37,6 +44,7 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
     public EditText editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile, editTextTextPasswordUserProfile, editTextTextPassword2UserProfile;
     public Button buttonUpdateProfile;
+    public ImageView imageViewLogout, imageViewViewPassword, imageViewViewPassword2;
     public IUsersDAO usersDAO;
 
     public ProfileFragment() {
@@ -81,10 +89,42 @@ public class ProfileFragment extends Fragment {
         editTextTextPasswordUserProfile = root.findViewById(R.id.editTextTextPasswordUserProfile);
         editTextTextPassword2UserProfile = root.findViewById(R.id.editTextTextPassword2UserProfile);
         buttonUpdateProfile = root.findViewById(R.id.buttonUpdateProfile);
+        imageViewLogout = root.findViewById(R.id.imageViewLogout);
+        imageViewViewPassword = root.findViewById(R.id.imageViewViewPassword);
+        imageViewViewPassword2 = root.findViewById(R.id.imageViewViewPassword2);
 
-        showUsers(editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile, editTextTextPasswordUserProfile, editTextTextPassword2UserProfile);
-        viewPassword();
+        usersDAO = DatabaseSingleton.getDatabase(getContext()).getUsersDAO();
 
+        showUsers(editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile,
+                editTextTextPasswordUserProfile, editTextTextPassword2UserProfile, usersDAO);
+        viewPassword(imageViewViewPassword, imageViewViewPassword2);
+
+        UpdateProfile(editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile,
+                editTextTextPasswordUserProfile, editTextTextPassword2UserProfile, buttonUpdateProfile, usersDAO);
+
+        imageViewLogout.setOnClickListener(v -> {
+            Logout(usersDAO);
+        });
+
+        return root;
+    }
+
+    void showUsers(EditText editTextFullNameUserProfile, EditText editTextUsernameUserProfile,
+                   EditText editTextPhoneNumberUserProfile, EditText editTextTextPasswordUserProfile,
+                   EditText editTextTextPassword2UserProfile, IUsersDAO usersDAO) {
+        List<GetActiveUser> users = usersDAO.getActiveUser();
+        users.forEach(user -> {
+            editTextFullNameUserProfile.setText(user.fullname);
+            editTextPhoneNumberUserProfile.setText(user.phone);
+            editTextUsernameUserProfile.setText(user.username);
+            editTextTextPasswordUserProfile.setText(user.password);
+            editTextTextPassword2UserProfile.setText(user.password);
+        });
+    }
+
+    void UpdateProfile(EditText editTextFullNameUserProfile, EditText editTextUsernameUserProfile, EditText editTextPhoneNumberUserProfile,
+                       EditText editTextTextPasswordUserProfile, EditText editTextTextPassword2UserProfile,
+                       @NonNull Button buttonUpdateProfile, IUsersDAO usersDAO){
         buttonUpdateProfile.setOnClickListener(v -> {
             String fullName = editTextFullNameUserProfile.getText().toString();
             String username = editTextUsernameUserProfile.getText().toString();
@@ -104,51 +144,40 @@ public class ProfileFragment extends Fragment {
                 editTextTextPasswordUserProfile.setError("Las contraseñas no coinciden");
                 editTextTextPassword2UserProfile.setError("Las contraseñas no coinciden");
             } else {
-                Users user = new Users(fullName, username, password, phoneNumber);
-                usersDAO.updateUser(user);
+                Users user = new Users(fullName, username, password, phoneNumber, 1);
+                usersDAO.updateUser(fullName, phoneNumber, username, password, usersDAO.getIdUserSession());
                 Toast.makeText(getContext(), "Perfil actualizado", Toast.LENGTH_SHORT).show();
+                Logout(usersDAO);
             }
-        });
-
-        return root;
-    }
-
-    void showUsers(EditText editTextFullNameUserProfile, EditText editTextUsernameUserProfile,
-                   EditText editTextPhoneNumberUserProfile, EditText editTextTextPasswordUserProfile,
-                   EditText editTextTextPassword2UserProfile) {
-
-        usersDAO = DatabaseSingleton.getDatabase(getContext()).getUsersDAO();
-        List<Users> users = usersDAO.getUsers();
-        users.forEach(user -> {
-            editTextFullNameUserProfile.setText(user.fullname);
-            editTextUsernameUserProfile.setText(user.username);
-            editTextPhoneNumberUserProfile.setText(user.phone);
-            editTextTextPasswordUserProfile.setText(user.password);
-            editTextTextPassword2UserProfile.setText(user.password);
         });
     }
 
-    void viewPassword() {
-        editTextTextPasswordUserProfile.setOnClickListener(v -> {
-            int currentInputType = editTextTextPasswordUserProfile.getInputType();
-            if (currentInputType == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                // Es un campo de contraseña, cambiarlo a texto plano
-                editTextTextPasswordUserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+    void viewPassword(ImageView imageViewViewPassword, ImageView imageViewViewPassword2) {
+        final boolean[] isPasswordVisible = {false};
+
+        imageViewViewPassword.setOnClickListener(v -> {
+            if (editTextTextPasswordUserProfile.getInputType() == 129) {
+                editTextTextPasswordUserProfile.setInputType(1);
             } else {
-                // Es un campo de texto plano, cambiarlo a contraseña
-                editTextTextPasswordUserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                editTextTextPasswordUserProfile.setInputType(129);
             }
         });
 
-        editTextTextPassword2UserProfile.setOnClickListener(v -> {
-            int currentInputType = editTextTextPasswordUserProfile.getInputType();
-            if (currentInputType == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                // Es un campo de contraseña, cambiarlo a texto plano
-                editTextTextPassword2UserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        imageViewViewPassword2.setOnClickListener(v -> {
+            if (editTextTextPassword2UserProfile.getInputType() == 129) {
+                editTextTextPassword2UserProfile.setInputType(1);
             } else {
-                // Es un campo de texto plano, cambiarlo a contraseña
-                editTextTextPassword2UserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                editTextTextPassword2UserProfile.setInputType(129);
             }
         });
+    }
+
+    void Logout(IUsersDAO usersDAO){
+        int userId = usersDAO.getIdUserSession();
+
+        usersDAO.logoutUser(userId);
+        Toast.makeText(getContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show();
+        Intent loginIntent = new Intent(getContext(), LoginActivity.class);
+        startActivity(loginIntent);
     }
 }

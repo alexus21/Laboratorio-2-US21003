@@ -82,12 +82,6 @@ public class VehiclesAdapter extends BaseAdapter {
 
         imageViewEdit.setOnClickListener(v -> {
             Intent editVehicleIntent = new Intent(context, EditVehicleInformationActivity.class);
-//            editVehicleIntent.putExtra("plateNumber", vehiclesList.getLicensePlate());
-//            editVehicleIntent.putExtra("brandName", vehiclesList.getBrand());
-//            editVehicleIntent.putExtra("fuelType", vehiclesList.getFuelType());
-//            editVehicleIntent.putExtra("color", vehiclesList.getVehicleColor());
-//            editVehicleIntent.putExtra("year", vehiclesList.getYear());
-//            editVehicleIntent.putExtra("totalPassengers", vehiclesList.getPassengers());
             context.startActivity(editVehicleIntent);
         });
 

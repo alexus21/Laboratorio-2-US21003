@@ -1,5 +1,6 @@
 package com.example.laboratorio2us21003.activities.vehicles;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,13 +13,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DAO.IVehiclesDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
+import com.example.laboratorio2us21003.models.vehicles.Vehicles;
+
+import java.util.ArrayList;
 
 public class EditVehicleInformationActivity extends AppCompatActivity {
 
     public EditText editTextEditPlateNumber, editTextEditBrandName, editTextEditFuelType, editTextEditColor, editTextEditYear, editTextEditTotalPassengers;
     public Button buttonRegisterEditVehicle, buttonCancellEdit;
+    public IVehiclesDAO iVehiclesDAO;
+    public IUsersDAO iUsersDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,19 @@ public class EditVehicleInformationActivity extends AppCompatActivity {
         buttonRegisterEditVehicle = findViewById(R.id.buttonRegisterEditVehicle);
         buttonCancellEdit = findViewById(R.id.buttonCancellEdit);
 
+        iUsersDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getUsersDAO();
+        iVehiclesDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getVehiclesDAO();
+        int idUserSession = iUsersDAO.getIdUserSession();
+        int idVehicle = iVehiclesDAO.getVehiclesByUser(idUserSession).get(0).getIdVehicle();
+        ArrayList<Vehicles> vehiclesArrayList = (ArrayList<Vehicles>) iVehiclesDAO.getVehiclesByUser(idUserSession);
+
+        editTextEditPlateNumber.setText(vehiclesArrayList.get(0).getLicensePlate());
+        editTextEditBrandName.setText(vehiclesArrayList.get(0).getBrand());
+        editTextEditFuelType.setText(vehiclesArrayList.get(0).getFuelType());
+        editTextEditColor.setText(vehiclesArrayList.get(0).getVehicleColor());
+        editTextEditYear.setText(String.valueOf(vehiclesArrayList.get(0).getYear()));
+        editTextEditTotalPassengers.setText(String.valueOf(vehiclesArrayList.get(0).getPassengers()));
+
         buttonCancellEdit.setOnClickListener(v -> {
             editTextEditPlateNumber.setText("");
             editTextEditBrandName.setText("");
@@ -51,6 +73,8 @@ public class EditVehicleInformationActivity extends AppCompatActivity {
             startActivity(homeIntent);
             finish();
         });
+
+
 
         buttonRegisterEditVehicle.setOnClickListener(v -> {
             String plateNumber = editTextEditPlateNumber.getText().toString().trim();
@@ -85,7 +109,8 @@ public class EditVehicleInformationActivity extends AppCompatActivity {
                 return;
             }
 
-            Toast.makeText(this, "Vehiculo registrado exitosamente", Toast.LENGTH_SHORT).show();
+            iVehiclesDAO.updateVehicleById(idVehicle, plateNumber, brandName, fuelType, color, Integer.parseInt(year), Integer.parseInt(totalPassengers));
+            Toast.makeText(this, "Información actualizadasd exitosamente", Toast.LENGTH_SHORT).show();
             editTextEditPlateNumber.setText("");
             editTextEditBrandName.setText("");
             editTextEditFuelType.setText("");

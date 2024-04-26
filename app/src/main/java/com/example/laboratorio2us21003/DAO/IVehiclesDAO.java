@@ -25,6 +25,9 @@ public interface IVehiclesDAO {
     @Update
     void updateVehicle(Vehicles vehicle);
 
+    @Query("UPDATE Vehicles SET licensePlate = :licensePlate, brand = :brand, fuelType = :fuelType, vehicleColor = :vehicleColor, year = :year, passengers = :passengers WHERE idVehicle = :idVehicle")
+    void updateVehicleById(int idVehicle, String licensePlate, String brand, String fuelType, String vehicleColor, int year, int passengers);
+
     @Delete
     void deleteVehicle(Vehicles vehicle);
 

@@ -32,7 +32,8 @@ public class VehiclesAdapter extends BaseAdapter {
     public IVehiclesDAO iVehiclesDAO;
     public IUsersDAO iUsersDAO;
 
-    public VehiclesAdapter(FragmentActivity fragmentActivity, ArrayList<Vehicles> vehiclesArrayList, int itemVehicleList) {
+    public VehiclesAdapter(FragmentActivity fragmentActivity,
+                           ArrayList<Vehicles> vehiclesArrayList, int itemVehicleList) {
         this.context = fragmentActivity;
         this.listVehicles = vehiclesArrayList;
     }

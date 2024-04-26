@@ -23,7 +23,8 @@ public class Vehicles {
     @ColumnInfo
     public int idUser;
 
-    public Vehicles(String licensePlate, String brand, String fuelType, String vehicleColor, int year, int passengers, int idUser) {
+    public Vehicles(String licensePlate, String brand, String fuelType,
+                    String vehicleColor, int year, int passengers, int idUser) {
         this.licensePlate = licensePlate;
         this.brand = brand;
         this.fuelType = fuelType;

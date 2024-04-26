@@ -88,7 +88,8 @@ public class VehiclesFragment extends Fragment {
         int idUserSession = iUsersDAO.getIdUserSession();
 
         vehiclesArrayList = (ArrayList<Vehicles>) iVehiclesDAO.getVehiclesByUser(idUserSession);
-        listViewVehicles.setAdapter(new VehiclesAdapter(getActivity(), vehiclesArrayList, R.layout.item_vehicle_list));
+        listViewVehicles.setAdapter(new VehiclesAdapter(getActivity(),
+                vehiclesArrayList, R.layout.item_vehicle_list));
 
         imageViewAddNewVehicle = root.findViewById(R.id.imageViewAddNewVehicle);
 

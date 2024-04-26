@@ -24,7 +24,8 @@ import java.util.ArrayList;
 
 public class EditVehicleInformationActivity extends AppCompatActivity {
 
-    public EditText editTextEditPlateNumber, editTextEditBrandName, editTextEditFuelType, editTextEditColor, editTextEditYear, editTextEditTotalPassengers;
+    public EditText editTextEditPlateNumber, editTextEditBrandName, editTextEditFuelType,
+            editTextEditColor, editTextEditYear, editTextEditTotalPassengers;
     public Button buttonRegisterEditVehicle, buttonCancellEdit;
     public IVehiclesDAO iVehiclesDAO;
     public IUsersDAO iUsersDAO;
@@ -74,8 +75,6 @@ public class EditVehicleInformationActivity extends AppCompatActivity {
             finish();
         });
 
-
-
         buttonRegisterEditVehicle.setOnClickListener(v -> {
             String plateNumber = editTextEditPlateNumber.getText().toString().trim();
             String brandName = editTextEditBrandName.getText().toString().trim();
@@ -109,15 +108,18 @@ public class EditVehicleInformationActivity extends AppCompatActivity {
                 return;
             }
 
-            iVehiclesDAO.updateVehicleById(idVehicle, plateNumber, brandName, fuelType, color, Integer.parseInt(year), Integer.parseInt(totalPassengers));
-            Toast.makeText(this, "Información actualizadasd exitosamente", Toast.LENGTH_SHORT).show();
+            iVehiclesDAO.updateVehicleById(idVehicle, plateNumber, brandName, fuelType, color,
+                    Integer.parseInt(year), Integer.parseInt(totalPassengers));
+            Toast.makeText(this, "Información actualizadasd exitosamente",
+                    Toast.LENGTH_SHORT).show();
             editTextEditPlateNumber.setText("");
             editTextEditBrandName.setText("");
             editTextEditFuelType.setText("");
             editTextEditColor.setText("");
             editTextEditYear.setText("");
             editTextEditTotalPassengers.setText("");
-            Intent homeIntent = new Intent(EditVehicleInformationActivity.this, HomeActivity.class);
+            Intent homeIntent = new Intent(EditVehicleInformationActivity.this,
+                    HomeActivity.class);
             startActivity(homeIntent);
             finish();
         });

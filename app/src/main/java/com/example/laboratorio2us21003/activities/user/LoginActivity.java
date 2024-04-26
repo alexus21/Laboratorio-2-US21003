@@ -16,14 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
-import com.example.laboratorio2us21003.fragments.home.HomeFragment;
-import com.example.laboratorio2us21003.fragments.users.SignUpFragment;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 

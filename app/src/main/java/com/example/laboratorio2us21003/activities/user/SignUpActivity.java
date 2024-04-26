@@ -121,15 +121,9 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
-            AppDatabase database = DatabaseSingleton.getDatabase(this);
-            usersDAO = database.getUsersDAO();
+            usersDAO = DatabaseSingleton.getDatabase(this).getUsersDAO();
 
-            Users user = new Users();
-            user.fullname = fullName;
-            user.phone = phoneNumber;
-            user.username = username;
-            user.password = password;
-
+            Users user = new Users(fullName, username, password, phoneNumber);
             usersDAO.insertUser(user);
 
             //Mostrar en logcat los usuarios registrados

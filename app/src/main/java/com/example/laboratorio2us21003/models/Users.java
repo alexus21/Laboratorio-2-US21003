@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = {"username"}, unique = true)})
+@Entity
 public class Users {
     @PrimaryKey(autoGenerate = true)
     public int idUser;
@@ -17,4 +17,11 @@ public class Users {
     public String username;
     @ColumnInfo
     public String password;
+
+    public Users(String fullname, String phone, String username, String password) {
+        this.fullname = fullname;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+    }
 }

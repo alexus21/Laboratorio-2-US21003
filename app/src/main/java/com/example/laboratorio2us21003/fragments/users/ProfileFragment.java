@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.laboratorio2us21003.AppDatabase;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
+import com.example.laboratorio2us21003.models.Users;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +37,7 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
     public EditText editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile, editTextTextPasswordUserProfile, editTextTextPassword2UserProfile;
     public Button buttonUpdateProfile;
+    public IUsersDAO usersDAO;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -63,8 +71,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
@@ -74,6 +81,9 @@ public class ProfileFragment extends Fragment {
         editTextTextPasswordUserProfile = root.findViewById(R.id.editTextTextPasswordUserProfile);
         editTextTextPassword2UserProfile = root.findViewById(R.id.editTextTextPassword2UserProfile);
         buttonUpdateProfile = root.findViewById(R.id.buttonUpdateProfile);
+
+        showUsers(editTextFullNameUserProfile, editTextUsernameUserProfile, editTextPhoneNumberUserProfile, editTextTextPasswordUserProfile, editTextTextPassword2UserProfile);
+        viewPassword();
 
         buttonUpdateProfile.setOnClickListener(v -> {
             String fullName = editTextFullNameUserProfile.getText().toString();
@@ -94,10 +104,51 @@ public class ProfileFragment extends Fragment {
                 editTextTextPasswordUserProfile.setError("Las contraseñas no coinciden");
                 editTextTextPassword2UserProfile.setError("Las contraseñas no coinciden");
             } else {
+                Users user = new Users(fullName, username, password, phoneNumber);
+                usersDAO.updateUser(user);
                 Toast.makeText(getContext(), "Perfil actualizado", Toast.LENGTH_SHORT).show();
             }
         });
 
         return root;
+    }
+
+    void showUsers(EditText editTextFullNameUserProfile, EditText editTextUsernameUserProfile,
+                   EditText editTextPhoneNumberUserProfile, EditText editTextTextPasswordUserProfile,
+                   EditText editTextTextPassword2UserProfile) {
+
+        usersDAO = DatabaseSingleton.getDatabase(getContext()).getUsersDAO();
+        List<Users> users = usersDAO.getUsers();
+        users.forEach(user -> {
+            editTextFullNameUserProfile.setText(user.fullname);
+            editTextUsernameUserProfile.setText(user.username);
+            editTextPhoneNumberUserProfile.setText(user.phone);
+            editTextTextPasswordUserProfile.setText(user.password);
+            editTextTextPassword2UserProfile.setText(user.password);
+        });
+    }
+
+    void viewPassword() {
+        editTextTextPasswordUserProfile.setOnClickListener(v -> {
+            int currentInputType = editTextTextPasswordUserProfile.getInputType();
+            if (currentInputType == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                // Es un campo de contraseña, cambiarlo a texto plano
+                editTextTextPasswordUserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            } else {
+                // Es un campo de texto plano, cambiarlo a contraseña
+                editTextTextPasswordUserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+        });
+
+        editTextTextPassword2UserProfile.setOnClickListener(v -> {
+            int currentInputType = editTextTextPasswordUserProfile.getInputType();
+            if (currentInputType == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                // Es un campo de contraseña, cambiarlo a texto plano
+                editTextTextPassword2UserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            } else {
+                // Es un campo de texto plano, cambiarlo a contraseña
+                editTextTextPassword2UserProfile.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+        });
     }
 }

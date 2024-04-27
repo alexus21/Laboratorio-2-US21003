@@ -23,6 +23,9 @@ public interface IUsersDAO {
     @Query("SELECT idUser FROM Users WHERE username = :username AND password = :password")
     List<GetUserID> getIdUsers(String username, String password);
 
+    @Query("SELECT idUser FROM Users WHERE sessionStatus = 1")
+    int getIdUser();
+
     @Insert
     void insertUser(Users user);
 

@@ -152,16 +152,6 @@ public class SignUpActivity extends AppCompatActivity {
             Users user = new Users(fullName, phoneNumber, username, password, 1);
             usersDAO.insertUser(user);
 
-            //Mostrar en logcat los usuarios registrados
-            for (Users u : usersDAO.getUsers()) {
-                System.out.println(u.fullname + " " + u.phone + " " + u.username + " " + u.password);
-            }
-
-            editTextFullNameSignUp.setText("");
-            editTextUsernameSignUp.setText("");
-            editTextPhoneNumberSignUp.setText("");
-            editTextTextPassword.setText("");
-            editTextTextPassword2.setText("");
             Toast.makeText(this, "Usuario registrado", Toast.LENGTH_SHORT).show();
             Intent homeIntent = new Intent(SignUpActivity.this, HomeActivity.class);
             startActivity(homeIntent);

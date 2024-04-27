@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.laboratorio2us21003.DAO.ICategoriesDAO;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.categories.AddNewCategoryActivity;
-import com.example.laboratorio2us21003.activities.categories.Category;
 import com.example.laboratorio2us21003.adapters.CategoryAdapter;
+import com.example.laboratorio2us21003.models.categories.Categories;
 
 import java.util.ArrayList;
 
@@ -35,8 +38,10 @@ public class CategoryFragment extends Fragment {
     private String mParam2;
     public ImageView imageViewAddNewCategory;
     public ListView listViewCategories;
-    public ArrayList<Category> categoriesArrayList;
+    public ArrayList<Categories> categoriesArrayList;
     CategoryAdapter categoryAdapter;
+    public IUsersDAO iUsersDAO;
+    public ICategoriesDAO iCategoriesDAO;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -77,7 +82,13 @@ public class CategoryFragment extends Fragment {
         listViewCategories = root.findViewById(R.id.listViewCategories);
         categoriesArrayList = new ArrayList<>();
 
-        fillUpCategoriesListView();
+        iUsersDAO = DatabaseSingleton.getDatabase(getContext()).getUsersDAO();
+        iCategoriesDAO = DatabaseSingleton.getDatabase(getContext()).getCategoriesDAO();
+
+        categoriesArrayList = (ArrayList<Categories>) iCategoriesDAO.getAllCategories();
+
+        categoryAdapter = new CategoryAdapter(getContext(), categoriesArrayList, R.layout.item_category_list);
+        listViewCategories.setAdapter(categoryAdapter);
 
         imageViewAddNewCategory = root.findViewById(R.id.imageViewAddNewCategory);
         imageViewAddNewCategory.setOnClickListener(v -> {
@@ -86,16 +97,5 @@ public class CategoryFragment extends Fragment {
         });
 
         return root;
-    }
-
-    void fillUpCategoriesListView() {
-        categoriesArrayList.add(new Category( "Categoría 1"));
-        categoriesArrayList.add(new Category( "Categoría 2"));
-        categoriesArrayList.add(new Category( "Categoría 3"));
-        categoriesArrayList.add(new Category( "Categoría 4"));
-        categoriesArrayList.add(new Category( "Categoría 5"));
-
-        categoryAdapter = new CategoryAdapter(getContext(), categoriesArrayList, R.layout.item_category_list);
-        listViewCategories.setAdapter(categoryAdapter);
     }
 }

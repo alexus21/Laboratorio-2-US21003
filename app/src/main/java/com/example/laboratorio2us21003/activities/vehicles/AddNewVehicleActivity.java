@@ -104,10 +104,6 @@ public class AddNewVehicleActivity extends AppCompatActivity {
                     Integer.parseInt(year), Integer.parseInt(totalPassengers), idUserSession);
             iVehiclesDAO.insertVehicle(newVehicle);
 
-            System.out.println(newVehicle.getLicensePlate() + newVehicle.getBrand()
-                    + newVehicle.getFuelType() + newVehicle.getVehicleColor()
-                    + newVehicle.getYear() + newVehicle.getPassengers() + newVehicle.getIdUser());
-
             Toast.makeText(this, "Vehiculo registrado exitosamente", Toast.LENGTH_SHORT).show();
             editTextNewPlateNumber.setText("");
             editTextNewBrandName.setText("");

@@ -75,7 +75,6 @@ public class VehiclesAdapter extends BaseAdapter {
         iVehiclesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getVehiclesDAO();
         vehiclesList = iVehiclesDAO.getVehiclesByUser(iUsersDAO.getIdUserSession()).get(position);
 
-        Vehicles finalVehiclesList = vehiclesList;
         imageViewDelete.setOnClickListener(v -> {
             AlertDialog dialog = getDialog(position, iVehiclesDAO);
             dialog.show();

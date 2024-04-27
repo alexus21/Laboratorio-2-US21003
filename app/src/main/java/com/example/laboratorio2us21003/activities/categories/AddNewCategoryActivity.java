@@ -12,13 +12,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.laboratorio2us21003.DAO.ICategoriesDAO;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
+import com.example.laboratorio2us21003.models.categories.Categories;
+
+import java.util.ArrayList;
 
 public class AddNewCategoryActivity extends AppCompatActivity {
 
     public EditText editTextAddNewCategory;
     public Button buttonAddNewCategory, buttonCancellCategory;
+    public ArrayList<Categories> categoriesArrayList;
+    public IUsersDAO iUsersDAO;
+    public ICategoriesDAO iCategoriesDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +52,20 @@ public class AddNewCategoryActivity extends AppCompatActivity {
             finish();
         });
 
+        iUsersDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getUsersDAO();
+        iCategoriesDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getCategoriesDAO();
+
+        int idUser = iUsersDAO.getIdUser();
+
         buttonAddNewCategory.setOnClickListener(v -> {
             String newCategory = editTextAddNewCategory.getText().toString();
             if (newCategory.isEmpty()) {
                 editTextAddNewCategory.setError("Campo requerido");
                 return;
             }
+
+            Categories category = new Categories(newCategory, idUser);
+            iCategoriesDAO.insertCategory(category);
 
             Toast.makeText(this, "Categoría registrada", Toast.LENGTH_SHORT).show();
             startActivity(homeIntent);

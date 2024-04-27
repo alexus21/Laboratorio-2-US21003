@@ -12,13 +12,23 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.laboratorio2us21003.DAO.ICategoriesDAO;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.home.HomeActivity;
+import com.example.laboratorio2us21003.models.categories.Categories;
+import com.example.laboratorio2us21003.models.categories.CategoriesWithUser;
+import com.example.laboratorio2us21003.models.users.GetUserID;
+
+import java.util.List;
 
 public class EditCategoryInformationActivity extends AppCompatActivity {
 
     public EditText editTextEditCategory;
     public Button buttonEditCategory, buttonCancellCategoryEdit;
+    public IUsersDAO iUsersDAO;
+    public ICategoriesDAO iCategoriesDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,25 @@ public class EditCategoryInformationActivity extends AppCompatActivity {
         buttonEditCategory = findViewById(R.id.buttonEditCategory);
         buttonCancellCategoryEdit = findViewById(R.id.buttonCancellCategoryEdit);
 
+        iUsersDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getUsersDAO();
+        iCategoriesDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getCategoriesDAO();
+
+        int idUser = iUsersDAO.getIdUser();
+        System.out.println("ID USUARIO: " + idUser);
+
+        List<Categories> categoriesWithUserList = iCategoriesDAO.getCategoriesByUser(iUsersDAO.getIdUser());
+        int idCategory = getIntent().getIntExtra("idCategory", 0);
+
+        System.out.println("ID: " + categoriesWithUserList.get(idCategory).getIdCategory());
+        System.out.println("Descripción: " + categoriesWithUserList.get(idCategory).getDescription());
+
+        editTextEditCategory.setText(categoriesWithUserList.get(idCategory).getDescription());
+
+//        for (Categories categoryUser : categoriesWithUserList) {
+//            System.out.println("ID: " + categoryUser.getIdCategory());
+//            System.out.println("Descripción: " + categoryUser.getDescription());
+//        }
+
         buttonCancellCategoryEdit.setOnClickListener(v -> {
             editTextEditCategory.setText("");
             startActivity(homeIntent);
@@ -49,6 +78,8 @@ public class EditCategoryInformationActivity extends AppCompatActivity {
                 editTextEditCategory.setError("Campo requerido");
                 return;
             }
+
+            iCategoriesDAO.updateCategory(idCategory, newCategory);
 
             Toast.makeText(this, "Categoría actualizada", Toast.LENGTH_SHORT).show();
             startActivity(homeIntent);

@@ -11,10 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.laboratorio2us21003.DAO.ICategoriesDAO;
+import com.example.laboratorio2us21003.DAO.IMaintenancesDAO;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DAO.IVehiclesDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.maintenances.AddNewMaintenanceActivity;
-import com.example.laboratorio2us21003.activities.maintenances.Maintenances;
 import com.example.laboratorio2us21003.adapters.MaintenanceAdapter;
+import com.example.laboratorio2us21003.models.maintenances.Maintenances;
 
 import java.util.ArrayList;
 
@@ -37,6 +42,10 @@ public class MaintenanceFragment extends Fragment {
     public ListView listViewMaintenances;
     public ArrayList<Maintenances> maintenancesArrayList;
     MaintenanceAdapter maintenanceAdapter;
+    public IUsersDAO usersDAO;
+    public IVehiclesDAO vehiclesDAO;
+    public ICategoriesDAO categoriesDAO;
+    public IMaintenancesDAO maintenancesDAO;
 
     public MaintenanceFragment() {
         // Required empty public constructor
@@ -74,10 +83,19 @@ public class MaintenanceFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_maintenance, container, false);
+
         listViewMaintenances = root.findViewById(R.id.listViewMaintenances);
         maintenancesArrayList = new ArrayList<>();
 
-        fillUpListView();
+        usersDAO = DatabaseSingleton.getDatabase(getContext()).getUsersDAO();
+        vehiclesDAO = DatabaseSingleton.getDatabase(getContext()).getVehiclesDAO();
+        categoriesDAO = DatabaseSingleton.getDatabase(getContext()).getCategoriesDAO();
+        maintenancesDAO = DatabaseSingleton.getDatabase(getContext()).getMaintenancesDAO();
+
+        maintenancesArrayList = (ArrayList<Maintenances>) maintenancesDAO.getAllMaintenances();
+
+        maintenanceAdapter = new MaintenanceAdapter(getContext(), maintenancesArrayList, R.layout.item_maintenance_list);
+        listViewMaintenances.setAdapter(maintenanceAdapter);
 
         imageViewNewMaintenance = root.findViewById(R.id.imageViewNewMaintenance);
         imageViewNewMaintenance.setOnClickListener(v -> {
@@ -86,14 +104,5 @@ public class MaintenanceFragment extends Fragment {
         });
 
         return root;
-    }
-
-    void fillUpListView(){
-        maintenancesArrayList.add(new Maintenances( "Preventivo", 180, "XD", 2, 1));
-        maintenancesArrayList.add(new Maintenances( "Reparación", 250, "XD", 3, 2));
-        maintenancesArrayList.add(new Maintenances( "ALV", 180, "XD", 4, 3));
-
-        maintenanceAdapter = new MaintenanceAdapter(getActivity(), maintenancesArrayList, R.layout.item_maintenance_list);
-        listViewMaintenances.setAdapter(maintenanceAdapter);
     }
 }

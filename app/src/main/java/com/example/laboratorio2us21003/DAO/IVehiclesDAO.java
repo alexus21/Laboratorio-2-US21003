@@ -19,6 +19,9 @@ public interface IVehiclesDAO {
     @Query("SELECT * FROM Vehicles WHERE idUser = :idUser")
     List<Vehicles> getVehiclesByUser(int idUser);
 
+    @Query("SELECT * FROM Vehicles WHERE brand = :brand")
+    Vehicles getVehicleIdByBrand(String brand);
+
     @Insert
     void insertVehicle(Vehicles vehicle);
 

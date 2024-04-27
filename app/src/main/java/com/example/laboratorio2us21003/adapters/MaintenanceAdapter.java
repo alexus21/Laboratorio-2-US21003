@@ -10,9 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.laboratorio2us21003.DAO.ICategoriesDAO;
+import com.example.laboratorio2us21003.DAO.IMaintenancesDAO;
+import com.example.laboratorio2us21003.DAO.IUsersDAO;
+import com.example.laboratorio2us21003.DAO.IVehiclesDAO;
+import com.example.laboratorio2us21003.DatabaseSingleton;
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.activities.maintenances.EditMaintenanceInformationActivity;
-import com.example.laboratorio2us21003.activities.maintenances.Maintenances;
+import com.example.laboratorio2us21003.models.maintenances.Maintenances;
 
 import java.util.ArrayList;
 
@@ -20,6 +25,10 @@ public class MaintenanceAdapter extends BaseAdapter {
 
     public Context context;
     public ArrayList<Maintenances> listMaintenances;
+    public IUsersDAO usersDAO;
+    public IVehiclesDAO vehiclesDAO;
+    public ICategoriesDAO categoriesDAO;
+    public IMaintenancesDAO maintenancesDAO;
 
     public MaintenanceAdapter(Context context, ArrayList<Maintenances> maintenancesArrayList, int itemMaintenanceList) {
         this.context = context;
@@ -54,6 +63,12 @@ public class MaintenanceAdapter extends BaseAdapter {
         TextView textViewMaintenanceCategory = convertView.findViewById(R.id.textViewMaintenanceCategory);
         TextView textViewMaintenanceCar = convertView.findViewById(R.id.textViewMaintenanceCar);
 
+        usersDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getUsersDAO();
+        vehiclesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getVehiclesDAO();
+        categoriesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getCategoriesDAO();
+        maintenancesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getMaintenancesDAO();
+        maintenancesList = maintenancesDAO.getMaintenanceById(maintenancesList.getMaintenanceId());
+
         ImageView imageViewEditMaintenance = convertView.findViewById(R.id.imageViewEditCategory);
         ImageView imageViewDeleteMaintenance = convertView.findViewById(R.id.imageViewDeleteCategory);
 
@@ -62,21 +77,22 @@ public class MaintenanceAdapter extends BaseAdapter {
             notifyDataSetChanged();
         });
 
+        Maintenances finalMaintenancesList = maintenancesList;
         imageViewEditMaintenance.setOnClickListener(v -> {
             Intent editMaintenanceIntent = new Intent(context, EditMaintenanceInformationActivity.class);
-            editMaintenanceIntent.putExtra("maintenanceDate", maintenancesList.getMaintenanceDate());
-            editMaintenanceIntent.putExtra("maintenanceCost", maintenancesList.getCost());
-            editMaintenanceIntent.putExtra("maintenanceDescription", maintenancesList.getDescription());
-            editMaintenanceIntent.putExtra("maintenanceCategory", maintenancesList.getIdCategory());
-            editMaintenanceIntent.putExtra("maintenanceCar", maintenancesList.getIdVehicle());
+            editMaintenanceIntent.putExtra("maintenanceDate", finalMaintenancesList.getMaintenanceDate());
+            editMaintenanceIntent.putExtra("maintenanceCost", finalMaintenancesList.getMaintenanceCost());
+            editMaintenanceIntent.putExtra("maintenanceDescription", finalMaintenancesList.getMaintenanceDescription());
+            editMaintenanceIntent.putExtra("maintenanceCategory", finalMaintenancesList.getMaintenanceCategory());
+            editMaintenanceIntent.putExtra("maintenanceCar", finalMaintenancesList.getMaintenanceCar());
             context.startActivity(editMaintenanceIntent);
         });
 
-        textViewMaintenanceDate.setText(maintenancesList.getMaintenanceDate());
-        textViewMaintenanceCost.setText(String.valueOf(maintenancesList.getCost()));
-        textViewMaintenanceDescription.setText(maintenancesList.getDescription());
-        textViewMaintenanceCategory.setText(String.valueOf(maintenancesList.getIdCategory()));
-        textViewMaintenanceCar.setText(String.valueOf(maintenancesList.getIdVehicle()));
+        textViewMaintenanceDate.setText(finalMaintenancesList.getMaintenanceDate());
+        textViewMaintenanceCost.setText(finalMaintenancesList.getMaintenanceCost());
+        textViewMaintenanceDescription.setText(finalMaintenancesList.getMaintenanceDescription());
+        textViewMaintenanceCategory.setText(String.valueOf(finalMaintenancesList.getMaintenanceCategory()));
+        textViewMaintenanceCar.setText(String.valueOf(finalMaintenancesList.getMaintenanceCar()));
 
         return convertView;
     }

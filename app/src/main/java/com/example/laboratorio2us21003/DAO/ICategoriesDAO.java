@@ -25,6 +25,9 @@ public interface ICategoriesDAO {
     @Query("SELECT * FROM Categories WHERE idCategory = :idCategory")
     Categories getCategoryById(int idCategory);
 
+    @Query("SELECT * FROM Categories WHERE description = :description")
+    Categories getCategoryByDescription(String description);
+
     @Insert
     void insertCategory(Categories category);
 

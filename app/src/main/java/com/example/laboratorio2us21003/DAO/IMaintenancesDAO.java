@@ -32,6 +32,9 @@ public interface IMaintenancesDAO {
     void updateMaintenanceById(int maintenanceId, String maintenanceDate, String maintenanceCost,
                                       String maintenanceDescription, int maintenanceCategory, int maintenanceCar);
 
+    @Query("SELECT Maintenances.*, Vehicles.*, Categories.*, Users.* FROM Maintenances INNER JOIN Categories ON Maintenances.maintenanceCategory = Categories.idCategory INNER JOIN Vehicles ON Maintenances.maintenanceCar = Vehicles.idVehicle INNER JOIN Users ON Maintenances.idUser = Users.idUser")
+    List<Maintenances> getAll();
+
 
     @Delete
     void deleteMaintenance(Maintenances maintenance);

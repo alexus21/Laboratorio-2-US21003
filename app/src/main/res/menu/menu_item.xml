@@ -13,10 +13,6 @@
         android:icon="@drawable/category"
         android:title="Categorías" />
     <item
-        android:id="@+id/reports"
-        android:icon="@drawable/report"
-        android:title="Reportes" />
-    <item
         android:id="@+id/my_profile"
         android:icon="@drawable/user_circle"
         android:title="Mi perfil" />

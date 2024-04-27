@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.example.laboratorio2us21003.R;
 import com.example.laboratorio2us21003.fragments.categories.CategoryFragment;
-import com.example.laboratorio2us21003.fragments.reports.ReportsFragment;
 import com.example.laboratorio2us21003.fragments.users.ProfileFragment;
 import com.example.laboratorio2us21003.fragments.vehicles.VehiclesFragment;
 import com.example.laboratorio2us21003.fragments.maintenances.MaintenanceFragment;
@@ -78,7 +77,6 @@ public class HomeFragment extends Fragment {
         vehiclesFragment = new VehiclesFragment();
         mantainanceFragment = new MaintenanceFragment();
         categoryFragment = new CategoryFragment();
-        reportsFragment = new ReportsFragment();
         profileFragment = new ProfileFragment();
         fragmentContainerView2 = root.findViewById(R.id.fragmentContainerView2);
         bottomNavigationViewOptions = root.findViewById(R.id.bottomNavigationViewOptions);
@@ -93,9 +91,6 @@ public class HomeFragment extends Fragment {
                     break;
                 case R.id.categories:
                     getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, categoryFragment).commit();
-                    break;
-                case R.id.reports:
-                    getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, reportsFragment).commit();
                     break;
                 case R.id.my_profile:
                     getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, profileFragment).commit();

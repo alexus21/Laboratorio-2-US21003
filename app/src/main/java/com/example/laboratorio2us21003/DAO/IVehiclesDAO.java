@@ -39,8 +39,4 @@ public interface IVehiclesDAO {
 
     @Delete
     void deleteVehicle(Vehicles vehicle);
-
-//    Vehicles getCarBrandById(int maintenanceCar);
-
-//    List<Vehicles> getVehiclesWithUsers();
 }

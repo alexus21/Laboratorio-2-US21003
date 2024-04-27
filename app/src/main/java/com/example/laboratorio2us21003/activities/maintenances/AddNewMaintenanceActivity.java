@@ -25,8 +25,8 @@ import com.example.laboratorio2us21003.models.categories.Categories;
 import com.example.laboratorio2us21003.models.maintenances.Maintenances;
 import com.example.laboratorio2us21003.models.vehicles.Vehicles;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddNewMaintenanceActivity extends AppCompatActivity {
 
@@ -90,6 +90,8 @@ public class AddNewMaintenanceActivity extends AppCompatActivity {
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNewMaintenanceCategory.setAdapter(adapterCategories);
 
+
+
         buttonCancellNewMaintenance.setOnClickListener(v -> {
             editTextNewMaintenanceDate.setText("");
             editTextNewMaintenanceCost.setText("");
@@ -105,6 +107,12 @@ public class AddNewMaintenanceActivity extends AppCompatActivity {
             String maintenanceDescription = editTextNewMaintenanceDescription.getText().toString().trim();
             String maintenanceCategory = spinnerNewMaintenanceCategory.getSelectedItem().toString();
             String maintenanceCar = spinnerNewMaintenanceCar.getSelectedItem().toString();
+
+            int categoryID = categoriesDAO.getCategoryByDescription(maintenanceCategory).getIdCategory();
+            int vehicleID = vehiclesDAO.getVehicleIdByBrand(maintenanceCar).getIdVehicle();
+
+            List<Maintenances> getMaintenancesByUser = maintenancesDAO.checkMaintenances(maintenanceDate, maintenanceCost, maintenanceDescription,
+                    categoriesDAO.getCategoryByDescription(maintenanceCategory).getIdCategory(), vehiclesDAO.getVehicleIdByBrand(maintenanceCar).getIdVehicle());
 
             if (maintenanceDate.isEmpty()){
                 editTextNewMaintenanceDate.setError("Campo requerido");
@@ -125,15 +133,23 @@ public class AddNewMaintenanceActivity extends AppCompatActivity {
             }
 
             if (maintenanceCategory.equals("Seleccione una categoría")){
+                Toast.makeText(this, "Seleccione una categoría", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (maintenanceCar.equals("Seleccione un vehículo")){
+                Toast.makeText(this, "Seleccione un vehículo", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            int categoryID = categoriesDAO.getCategoryByDescription(maintenanceCategory).getIdCategory();
-            int vehicleID = vehiclesDAO.getVehicleIdByBrand(maintenanceCar).getIdVehicle();
+            for (Maintenances maintenance : getMaintenancesByUser) {
+                if (maintenance.getMaintenanceDate().equals(maintenanceDate) && maintenance.getMaintenanceCost().equals(maintenanceCost) &&
+                        maintenance.getMaintenanceDescription().equals(maintenanceDescription) && maintenance.getMaintenanceCategory() == categoriesDAO.getCategoryByDescription(maintenanceCategory).getIdCategory() &&
+                        maintenance.getMaintenanceCar() == vehiclesDAO.getVehicleIdByBrand(maintenanceCar).getIdVehicle()) {
+                    Toast.makeText(this, "Este mantenimiento ya ha sido registrado", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
 
             Maintenances maintenance = new Maintenances(maintenanceDate, maintenanceCost, maintenanceDescription, categoryID, vehicleID, userID);
             maintenancesDAO.insertMaintenance(maintenance);

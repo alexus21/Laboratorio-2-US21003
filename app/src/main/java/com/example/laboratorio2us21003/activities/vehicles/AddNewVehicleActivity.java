@@ -70,10 +70,19 @@ public class AddNewVehicleActivity extends AppCompatActivity {
             String year = editTextNewYear.getText().toString().trim();
             String totalPassengers = editTextNewTotalPassengers.getText().toString().trim();
 
+            iVehiclesDAO = DatabaseSingleton.getDatabase(getApplicationContext()).getVehiclesDAO();
+            vehiclesArrayList = (ArrayList<Vehicles>) iVehiclesDAO.getVehicles();
+
             if (plateNumber.isEmpty()) {
                 editTextNewPlateNumber.setError("Campo requerido");
                 return;
             }
+
+            if(plateNumber.equals(vehiclesArrayList.get(0).getLicensePlate())){
+                editTextNewPlateNumber.setError("La placa ya existe en el sistema");
+                return;
+            }
+
             if (brandName.isEmpty()) {
                 editTextNewBrandName.setError("Campo requerido");
                 return;

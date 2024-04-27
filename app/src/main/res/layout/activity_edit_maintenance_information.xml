@@ -106,7 +106,7 @@
         android:layout_marginTop="140dp"
         android:backgroundTint="@android:color/holo_green_dark"
         android:fontFamily="@font/roboto"
-        android:text="Registrar nuevo mantenimiento"
+        android:text="Actualizar datos de mantenimiento"
         app:layout_constraintTop_toBottomOf="@+id/spinnerEditMaintenanceCar"
         tools:layout_editor_absoluteX="0dp" />
 

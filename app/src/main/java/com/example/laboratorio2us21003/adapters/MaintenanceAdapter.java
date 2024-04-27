@@ -1,6 +1,7 @@
 package com.example.laboratorio2us21003.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -69,14 +70,15 @@ public class MaintenanceAdapter extends BaseAdapter {
         vehiclesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getVehiclesDAO();
         categoriesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getCategoriesDAO();
         maintenancesDAO = DatabaseSingleton.getDatabase(convertView.getContext()).getMaintenancesDAO();
+
         maintenancesList = maintenancesDAO.getMaintenanceById(maintenancesList.getMaintenanceId());
 
         ImageView imageViewEditMaintenance = convertView.findViewById(R.id.imageViewEditCategory);
         ImageView imageViewDeleteMaintenance = convertView.findViewById(R.id.imageViewDeleteCategory);
 
         imageViewDeleteMaintenance.setOnClickListener(v -> {
-            listMaintenances.remove(position);
-            notifyDataSetChanged();
+            AlertDialog dialog = getDialog(position, maintenancesDAO);
+            dialog.show();
         });
 
         Vehicles carBrandMaintenace = vehiclesDAO.getVehicleById(maintenancesList.getMaintenanceCar());
@@ -103,5 +105,17 @@ public class MaintenanceAdapter extends BaseAdapter {
         textViewMaintenanceCar.setText(carBrand);
 
         return convertView;
+    }
+
+    AlertDialog getDialog(int position, IMaintenancesDAO maintenancesDAO) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Eliminar categoría?");
+        builder.setMessage("¿Está seguro que desea eliminar esta categoría?");
+        builder.setPositiveButton("Sí", (dialog, which) -> {
+            maintenancesDAO.deleteMaintenance(listMaintenances.get(position));
+            notifyDataSetChanged();
+        });
+        builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        return builder.create();
     }
 }

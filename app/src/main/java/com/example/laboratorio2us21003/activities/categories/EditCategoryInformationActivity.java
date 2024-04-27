@@ -53,9 +53,9 @@ public class EditCategoryInformationActivity extends AppCompatActivity {
         int idUser = iUsersDAO.getIdUser();
 
         List<Categories> categoriesWithUserList = iCategoriesDAO.getCategoriesByUser(iUsersDAO.getIdUser());
-        int idCategory = getIntent().getIntExtra("idCategory", 0);
+        int idCategory = iCategoriesDAO.getCategoryByUSerID(idUser).getIdUser();
 
-        editTextEditCategory.setText(categoriesWithUserList.get(idCategory).getDescription());
+        editTextEditCategory.setText(categoriesWithUserList.get(0).getDescription());
 
         buttonCancellCategoryEdit.setOnClickListener(v -> {
             editTextEditCategory.setText("");

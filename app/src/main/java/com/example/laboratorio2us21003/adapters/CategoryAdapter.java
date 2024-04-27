@@ -70,7 +70,6 @@ public class CategoryAdapter extends BaseAdapter {
         Categories finalCategoryList = categoryList;
         imageViewEditCategory.setOnClickListener(v -> {
             Intent editCategoryIntent = new Intent(context, EditCategoryInformationActivity.class);
-            editCategoryIntent.putExtra("idCategory", finalCategoryList.getIdCategory());
             context.startActivity(editCategoryIntent);
         });
 

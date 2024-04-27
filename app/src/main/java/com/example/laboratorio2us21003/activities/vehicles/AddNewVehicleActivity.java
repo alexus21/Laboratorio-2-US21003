@@ -78,10 +78,10 @@ public class AddNewVehicleActivity extends AppCompatActivity {
                 return;
             }
 
-            if(plateNumber.equals(vehiclesArrayList.get(0).getLicensePlate())){
-                editTextNewPlateNumber.setError("La placa ya existe en el sistema");
-                return;
-            }
+//            if(plateNumber.equals(vehiclesArrayList.get(0).getLicensePlate())){
+//                editTextNewPlateNumber.setError("La placa ya existe en el sistema");
+//                return;
+//            }
 
             if (brandName.isEmpty()) {
                 editTextNewBrandName.setError("Campo requerido");

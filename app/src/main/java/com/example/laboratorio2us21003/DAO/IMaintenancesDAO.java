@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.laboratorio2us21003.models.maintenances.Maintenances;
+import com.example.laboratorio2us21003.models.vehicles.Vehicles;
 
 import java.util.List;
 
@@ -16,13 +17,6 @@ public interface IMaintenancesDAO {
 
     @Query("SELECT * FROM Maintenances WHERE maintenanceId = :maintenanceId")
     public Maintenances getMaintenanceById(int maintenanceId);
-
-    //Obtener el id
-    @Query("SELECT maintenanceId FROM Maintenances")
-    public List<Integer> getAllMaintenancesIds();
-
-    @Query("SELECT maintenanceId FROM Maintenances WHERE maintenanceCar = :maintenanceCar")
-    public List<Integer> getMaintenancesByCar(int maintenanceCar);
 
     @Insert
     public void insertMaintenance(Maintenances maintenance);

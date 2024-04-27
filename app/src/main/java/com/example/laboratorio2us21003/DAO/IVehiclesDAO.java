@@ -22,6 +22,9 @@ public interface IVehiclesDAO {
     @Query("SELECT * FROM Vehicles WHERE brand = :brand")
     Vehicles getVehicleIdByBrand(String brand);
 
+    @Query("SELECT * FROM Vehicles WHERE idVehicle = :idVehicle")
+    Vehicles getVehicleById(int idVehicle);
+
     @Insert
     void insertVehicle(Vehicles vehicle);
 
@@ -36,6 +39,8 @@ public interface IVehiclesDAO {
 
     @Delete
     void deleteVehicle(Vehicles vehicle);
+
+//    Vehicles getCarBrandById(int maintenanceCar);
 
 //    List<Vehicles> getVehiclesWithUsers();
 }
